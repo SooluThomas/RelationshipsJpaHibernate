@@ -18,8 +18,12 @@ import org.slf4j.Logger;
 public class DemoApplication implements CommandLineRunner {
 
 	@Autowired
-	//private CourseRepository repository;
-	//private PassportRepository passportRepository;
+	private CourseRepository repository;
+
+	@Autowired
+	private PassportRepository passportRepository;
+
+	@Autowired
 	private ReviewRepository reviewRepository;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -30,13 +34,13 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-//		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Spring Boot")));
-//		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Java")));
-//		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Bootstrap")));
+		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Spring Boot")));
+		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Java")));
+		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Bootstrap")));
 
-//		logger.info("Inserting -> {}", passportRepository.save(new Passport("F3003333")));
-//		logger.info("Inserting -> {}", passportRepository.save(new Passport("A4204567")));
-//		logger.info("Inserting -> {}", passportRepository.save(new Passport("V0099332")));
+		logger.info("Inserting -> {}", passportRepository.save(new Passport("F3003333")));
+		logger.info("Inserting -> {}", passportRepository.save(new Passport("A4204567")));
+		logger.info("Inserting -> {}", passportRepository.save(new Passport("V0099332")));
 
 		logger.info("Inserting -> {}", reviewRepository.insert(new Review("5", "Super!")));
 		logger.info("Inserting -> {}", reviewRepository.insert(new Review("3", "Good Try")));
