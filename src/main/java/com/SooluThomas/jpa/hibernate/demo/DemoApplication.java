@@ -14,11 +14,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.slf4j.Logger;
 
+import java.time.LocalDateTime;
+
+
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 
 	@Autowired
-	private CourseRepository repository;
+	private CourseRepository courseRepository;
 
 	@Autowired
 	private PassportRepository passportRepository;
@@ -27,6 +30,8 @@ public class DemoApplication implements CommandLineRunner {
 	private ReviewRepository reviewRepository;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	private LocalDateTime time = LocalDateTime.now();
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
@@ -34,9 +39,9 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Spring Boot")));
-		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Java")));
-		logger.info("Inserting -> {}", repository.save(new Course("Introduction to Bootstrap")));
+		logger.info("Inserting -> {}", courseRepository.save(new Course("Introduction to Spring Boot", time, time)));
+		logger.info("Inserting -> {}", courseRepository.save(new Course("Introduction to Java", time, time)));
+		logger.info("Inserting -> {}", courseRepository.save(new Course("Introduction to Bootstrap", time, time)));
 
 		logger.info("Inserting -> {}", passportRepository.save(new Passport("F3003333")));
 		logger.info("Inserting -> {}", passportRepository.save(new Passport("A4204567")));
@@ -45,6 +50,8 @@ public class DemoApplication implements CommandLineRunner {
 		logger.info("Inserting -> {}", reviewRepository.insert(new Review("5", "Super!")));
 		logger.info("Inserting -> {}", reviewRepository.insert(new Review("3", "Good Try")));
 		logger.info("Inserting -> {}", reviewRepository.insert(new Review("1", "I won't recommend")));
+
+		courseRepository.playWithEntityManager();
 
 
 //		Course course= repository.findById(1);

@@ -28,4 +28,12 @@ public class CourseRepository {
         Course del = findById(id);
         entityManager.remove(del);
     }
+
+    public void playWithEntityManager(){
+        Course course1 = new Course("Web Service in 100 Steps");
+        entityManager.persist(course1);
+
+        Course course2 = findById(1);
+        course2.setName("JPA in 50 Steps - Updated");
+    }
 }

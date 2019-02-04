@@ -1,9 +1,13 @@
 package com.SooluThomas.jpa.hibernate.demo.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 public class Course {
@@ -14,11 +18,23 @@ public class Course {
     @Column(nullable = false)
     private String name;
 
+    @UpdateTimestamp
+    private LocalDateTime lastUpdatedDate;
+
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+
     protected Course() {
     }
 
     public Course(String name) {
         this.name = name;
+    }
+
+    public Course(String name, LocalDateTime lastUpdatedDate, LocalDateTime createdDate) {
+        this.name = name;
+        this.lastUpdatedDate = lastUpdatedDate;
+        this.createdDate = createdDate;
     }
 
     public String getName() {
