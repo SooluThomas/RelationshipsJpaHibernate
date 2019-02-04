@@ -10,7 +10,9 @@ public class Passport {
     @Column(nullable = false)
     private String number;
 
-    @OneToOne(fetch = FetchType.LAZY) //mappedBy = "Student.class")
+    //mappedBy uses the object of the passport class in the owning side
+    //and is used in the non-owning side of the relationship
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
     private Student student;
 
     public Passport(){}
@@ -25,6 +27,14 @@ public class Passport {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public void getId(Long id) {

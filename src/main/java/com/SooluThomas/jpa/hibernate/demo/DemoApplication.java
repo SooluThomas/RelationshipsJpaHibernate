@@ -46,8 +46,6 @@ public class DemoApplication implements CommandLineRunner {
 
 		courseRepository.playWithEntityManager();
 
-		passportRepository.playWithEntityManager();
-
 		reviewRepository.playWithEntityManager();
 
 		studentRepository.insertInitialValues();

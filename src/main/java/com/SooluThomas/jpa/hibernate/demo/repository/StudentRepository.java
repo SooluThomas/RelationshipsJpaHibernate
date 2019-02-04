@@ -70,13 +70,21 @@ public class StudentRepository {
     //This function can retrieve Passport details of a student thru StudentRepository or Service Layer
     //@Transactional is added to extend the servive for this entire method rather than each line.
     //if @Transactional is not added then the student.getPassport will get an Exception
-    //I can also change the name of Student 
+    //I can also change the name of Student
+    //the program myt end up getting error if there is no student with id= 13. It depends which hibernate sequence is updated.
     @Transactional
     public void retrieveStudentAndPassportDetails() {
-        Student student = entityManager.find(Student.class, 12L);
+        Student student = entityManager.find(Student.class, 13L);
         logger.info("student 11 -> {}", student);
         logger.info("passport -> {}", student.getPassport());
         Passport passport = student.getPassport();
         student.setName("Soonu Thomas");
+    }
+
+    public void retrievePassportAndAssociatedStudent(){
+        Passport passport = entityManager.find(Passport.class, 12L);
+        logger.info("Passport 12l -> {}", passport);
+        logger.info("Passport -> {}", passport.getStudent());
+
     }
 }
