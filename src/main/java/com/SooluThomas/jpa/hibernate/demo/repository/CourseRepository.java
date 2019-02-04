@@ -1,6 +1,9 @@
 package com.SooluThomas.jpa.hibernate.demo.repository;
 
 import com.SooluThomas.jpa.hibernate.demo.entity.Course;
+import com.SooluThomas.jpa.hibernate.demo.entity.Review;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import java.time.LocalDateTime;
 public class CourseRepository {
     @Autowired
     EntityManager entityManager;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private LocalDateTime time = LocalDateTime.now();
 
@@ -32,16 +37,24 @@ public class CourseRepository {
         entityManager.remove(del);
     }
 
-    public void playWithEntityManager(){
+    public void addReviewsForCourse(){
+        //getting course
+        Course course = findById(5L);
+        logger.info("course.getReviews() -> {}", course.getReview());
 
-        save(new Course("Introduction to Spring Boot", time, time));
-        save(new Course("Introduction to Java", time, time));
-        save(new Course("Introduction to Bootstrap", time, time));
+        //adding reviews
+        Review review1 = new Review("3", "Good Teaching");
+        Review review2 = new Review("4", "Really satisfied");
 
-        Course course1 = new Course("Web Service in 100 Steps");
-        entityManager.persist(course1);
+        //setting the relationship
+        course.addReviews(review1);
+        review1.setCourse(course);
 
-        Course course2 = findById(1);
-        course2.setName("JPA in 50 Steps - Updated");
+        course.addReviews(review2);
+        review2.setCourse(course);
+
+        //adding to database
+        entityManager.persist(review1);
+        entityManager.persist(review2);
     }
 }

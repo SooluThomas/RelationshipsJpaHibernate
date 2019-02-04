@@ -1,5 +1,6 @@
 package com.SooluThomas.jpa.hibernate.demo.repository;
 
+import com.SooluThomas.jpa.hibernate.demo.entity.Course;
 import com.SooluThomas.jpa.hibernate.demo.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,10 +23,22 @@ public class ReviewRepository {
         return add;
     }
 
+    @Transactional
     public void playWithEntityManager(){
-        insert(new Review("5", "Super!"));
-        insert(new Review("3", "Good Try"));
-        insert(new Review("1", "I won't recommend"));
+        Course course1 = new Course("JPA in 50 Steps - Updated");
+        em.persist(course1);
+        Review review1 = new Review("5", "Super!", course1);
+        em.persist(review1);
+
+        Course course2 = new Course("Web Service in 100 Steps");
+        em.persist(course2);
+        Review review2 = new Review("3", "Good Try", course2);
+        em.persist(review2);
+
+        Course course3 = new Course("Introduction to Java");
+        em.persist(course3);
+        Review review3 = new Review("1", "I won't recommend", course3);
+        em.persist(review3);
     }
 
 }
