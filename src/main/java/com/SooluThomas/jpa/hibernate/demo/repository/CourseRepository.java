@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -37,14 +38,14 @@ public class CourseRepository {
         entityManager.remove(del);
     }
 
-    public void addReviewsForCourse(){
+    public void addHardCodedReviewsForCourse(){
         //getting course
-        Course course = findById(5L);
+        Course course = findById(2001L);
         logger.info("course.getReviews() -> {}", course.getReview());
 
         //adding reviews
-        Review review1 = new Review("3", "Good Teaching");
-        Review review2 = new Review("4", "Really satisfied");
+        Review review1 = new Review(1001L, "3", "Good Teaching");
+        Review review2 = new Review(1002L,"4", "Really satisfied");
 
         //setting the relationship
         course.addReviews(review1);
@@ -57,4 +58,16 @@ public class CourseRepository {
         entityManager.persist(review1);
         entityManager.persist(review2);
     }
+
+    public void addReviewsForCourses(Long id, List<Review> reviews){
+        Course course = findById(id);
+        //logger.info("Course.getReviews() -> {}", course.getReview());
+
+        for (Review review : reviews){
+            course.addReviews(review);
+            review.setCourse(course);
+            entityManager.persist(review);
+        }
+    }
+
 }

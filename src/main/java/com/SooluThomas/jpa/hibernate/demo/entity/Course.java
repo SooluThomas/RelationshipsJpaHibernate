@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class Course {
     @Id
-    @GeneratedValue
+    //@GeneratedValue
     private long id;
 
     @Column(nullable = false)
@@ -29,11 +29,8 @@ public class Course {
     protected Course() {
     }
 
-    public Course(String name) {
-        this.name = name;
-    }
-
-    public Course(String name, LocalDateTime lastUpdatedDate, LocalDateTime createdDate) {
+    public Course(long id, String name, LocalDateTime lastUpdatedDate, LocalDateTime createdDate) {
+        this.id = id;
         this.name = name;
         this.lastUpdatedDate = lastUpdatedDate;
         this.createdDate = createdDate;

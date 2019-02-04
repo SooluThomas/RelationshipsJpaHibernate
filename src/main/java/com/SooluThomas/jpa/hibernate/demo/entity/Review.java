@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Review {
     @Id
-    @GeneratedValue
+    //@GeneratedValue
     private Long id;
 
     private String reviewRate;
@@ -20,12 +20,19 @@ public class Review {
     protected Review() {
     }
 
-    public Review(String reviewRate, String description) {
+//    public Review(String reviewRate, String description) {
+//        this.reviewRate = reviewRate;
+//        this.description = description;
+//    }
+
+    public Review(Long id, String reviewRate, String description) {
+        this.id = id;
         this.reviewRate = reviewRate;
         this.description = description;
     }
 
-    public Review(String reviewRate, String description, Course course) {
+    public Review(Long id, String reviewRate, String description, Course course) {
+        this.id = id;
         this.reviewRate = reviewRate;
         this.description = description;
         this.course = course;
