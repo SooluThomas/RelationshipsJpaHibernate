@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 @Service
 @Transactional
@@ -14,6 +15,8 @@ import javax.transaction.Transactional;
 public class CourseRepository {
     @Autowired
     EntityManager entityManager;
+
+    private LocalDateTime time = LocalDateTime.now();
 
     public Course findById(long id){
         return entityManager.find(Course.class, id);
@@ -30,6 +33,11 @@ public class CourseRepository {
     }
 
     public void playWithEntityManager(){
+
+        save(new Course("Introduction to Spring Boot", time, time));
+        save(new Course("Introduction to Java", time, time));
+        save(new Course("Introduction to Bootstrap", time, time));
+
         Course course1 = new Course("Web Service in 100 Steps");
         entityManager.persist(course1);
 

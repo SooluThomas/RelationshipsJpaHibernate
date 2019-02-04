@@ -1,8 +1,7 @@
 package com.SooluThomas.jpa.hibernate.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 public class Student {
@@ -10,10 +9,22 @@ public class Student {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String name;
+
+    @OneToOne
+    private Passport passport;
+
+    public Student() {
+    }
 
     public Student(String name) {
         this.name = name;
+    }
+
+    public Student(String name, Passport passport) {
+        this.name = name;
+        this.passport = passport;
     }
 
     public String getName() {
@@ -22,6 +33,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 
     public Long getId() {

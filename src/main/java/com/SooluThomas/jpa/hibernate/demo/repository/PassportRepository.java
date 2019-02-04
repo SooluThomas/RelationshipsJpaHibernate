@@ -28,4 +28,10 @@ public class PassportRepository {
         Passport del = findById(id);
         entityManager.remove(del);
     }
+
+    public void playWithEntityManager(){
+        save(new Passport("F3003333"));
+        save(new Passport("A4204567"));
+        save(new Passport("V0099332"));
+    }
 }

@@ -22,4 +22,10 @@ public class ReviewRepository {
         return add;
     }
 
+    public void playWithEntityManager(){
+        insert(new Review("5", "Super!"));
+        insert(new Review("3", "Good Try"));
+        insert(new Review("1", "I won't recommend"));
+    }
+
 }

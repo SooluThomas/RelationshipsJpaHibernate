@@ -1,9 +1,6 @@
 package com.SooluThomas.jpa.hibernate.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Passport {
@@ -13,7 +10,10 @@ public class Passport {
     @Column(nullable = false)
     private String number;
 
-    protected Passport(){}
+    @OneToOne(fetch = FetchType.LAZY) //mappedBy = "Student.class")
+    private Student student;
+
+    public Passport(){}
 
     public Passport(String number) {
         this.number = number;

@@ -1,11 +1,10 @@
 package com.SooluThomas.jpa.hibernate.demo;
 
-import com.SooluThomas.jpa.hibernate.demo.entity.Course;
-import com.SooluThomas.jpa.hibernate.demo.entity.Passport;
-import com.SooluThomas.jpa.hibernate.demo.entity.Review;
+
 import com.SooluThomas.jpa.hibernate.demo.repository.CourseRepository;
 import com.SooluThomas.jpa.hibernate.demo.repository.PassportRepository;
 import com.SooluThomas.jpa.hibernate.demo.repository.ReviewRepository;
+import com.SooluThomas.jpa.hibernate.demo.repository.StudentRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +27,12 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Autowired
 	private ReviewRepository reviewRepository;
+
+	@Autowired
+	private StudentRepository studentRepository;
+
+
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private LocalDateTime time = LocalDateTime.now();
@@ -39,19 +44,16 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		logger.info("Inserting -> {}", courseRepository.save(new Course("Introduction to Spring Boot", time, time)));
-		logger.info("Inserting -> {}", courseRepository.save(new Course("Introduction to Java", time, time)));
-		logger.info("Inserting -> {}", courseRepository.save(new Course("Introduction to Bootstrap", time, time)));
-
-		logger.info("Inserting -> {}", passportRepository.save(new Passport("F3003333")));
-		logger.info("Inserting -> {}", passportRepository.save(new Passport("A4204567")));
-		logger.info("Inserting -> {}", passportRepository.save(new Passport("V0099332")));
-
-		logger.info("Inserting -> {}", reviewRepository.insert(new Review("5", "Super!")));
-		logger.info("Inserting -> {}", reviewRepository.insert(new Review("3", "Good Try")));
-		logger.info("Inserting -> {}", reviewRepository.insert(new Review("1", "I won't recommend")));
-
 		courseRepository.playWithEntityManager();
+
+		passportRepository.playWithEntityManager();
+
+		reviewRepository.playWithEntityManager();
+
+		studentRepository.insertInitialValues();
+		studentRepository.saveStudentWithPassport();
+
+		studentRepository.retrieveStudentAndPassportDetails();
 
 
 //		Course course= repository.findById(1);
